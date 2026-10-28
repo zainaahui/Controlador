@@ -1,67 +1,57 @@
-# 🎮 Controlador Físico Interactivo para Web Games
+[readme_del_controlador_para_juego_web (1).md](https://github.com/user-attachments/files/34104540/readme_del_controlador_para_juego_web.1.md)
+# Controlador Físico Interactivo para Videojuegos Web 🕹️
 
-Controlador de hardware personalizado diseñado con **Arduino Uno**, un potenciómetro deslizante, un pulsador de arcade y un gabinete de MDF cortado a láser, pensado para interactuar con un juego alojado en una página web.
+Este repositorio documenta el proceso de diseño, modelado 3D, electrónica y ensamblaje de un controlador físico personalizado creado con Arduino, diseñado específicamente para interactuar y controlar un videojuego alojado en una página web.
 
----
+## 📋 Descripción del Proyecto
 
-## 🛠️ 1. Componentes y Electrónica
-En esta primera fase se realizó la selección de componentes y el cableado preliminar para verificar la lectura de señales analógicas y digitales.
+El objetivo de este proyecto es tender un puente entre el hardware físico y el software web. Mediante el uso de un microcontrolador Arduino Uno, componentes de entrada analógicos y digitales (un potenciómetro deslizante y un pulsador tipo arcade), y una carcasa diseñada a medida, este controlador permite enviar comandos interactivos en tiempo real a una aplicación web.
 
-* **Arduino Uno R3** como microcontrolador principal.
-* **Potenciómetro deslizante** (control de eje lineal).
-* **Pulsador de arcade** con microswitch (acción de disparo/salto).
-* **Placa perforada (Perfboard)** para la consolidación de conexiones.
+## 🛠️ Componentes y Materiales
 
-<div align="center">
-  <img src="ruta/a/tu/carpeta/IMG_3637.jpg" width="45%" alt="Pruebas de cableado en protoboard/Arduino">
-  <img src="ruta/a/tu/carpeta/IMG_3638.jpg" width="45%" alt="Soldadura y montaje en placa perforada">
-</div>
-![Circuito con Arduino Uno](assets/IMG_3637.jpg)
-![Montaje en placa perforada](assets/IMG_3638.jpg)
-![Modelado en Rhino 3D](assets/IMG_3639.jpg)
-![Render del gabinete](assets/Captura%20de%20pantalla%202026-10-28%20192742.png)
----
+### 1. Electrónica y Hardware
+* **Microcontrolador:** Arduino Uno R3 con cable USB.
+* **Entrada Analógica:** Potenciómetro deslizante.
+* **Entrada Digital:** Pulsador o botón tipo arcade con microswitch.
+* **Conexión:** Placa perforada (*perfboard*) y cables de conexión (*jumpers*).
 
-## 📐 2. Diseño CAD 3D (Rhinoceros 8)
-El gabinete fue modelado digitalmente considerando las tolerancias exactas para albergar el Arduino, el cableado y los elementos de interfaz superior (la ranura para el deslizador y el agujero para el botón de arcade).
-
-* Modelado volumétrico de la caja con pestañas de unión tipo finger-joint.
-* Distribución espacial superior para ergonomía del jugador.
-
-<div align="center">
-  <img src="ruta/a/tu/carpeta/IMG_3639.jpg" width="45%" alt="Proceso de diseño en Rhino 3D">
-  <img src="ruta/a/tu/carpeta/Captura%20de%20pantalla%202026-10-28%20192742.png" width="45%" alt="Render de piezas despiezadas para corte láser">
-</div>
+### 2. Diseño y Fabricación de la Carcasa
+* **Software:** Rhinoceros 3D para el diseño CAD de la caja y la tapa superior con orificios precisos.
 
 ---
 
-## 🏗️ 3. Fabricación y Ensamblaje Final
-*Corte láser de las piezas de MDF y ensamblaje de la estructura.*
+## ⚙️ Proceso de Creación y Desarrollo
 
-> 📷 *(Espacio reservado para las fotos del montaje final de la caja cortada a láser)*
+### Fase 1: Diseño 3D en Rhinoceros
+En esta etapa inicial se planificó la volumetría de la caja contenedora, las pestañas de encaje y las aberturas específicas para el potenciómetro y el botón arcade.
+
+![Vistas técnicas en Rhino](IMG_3639.jpg)
+*Figura 1: Vistas técnicas de los planos y componentes en Rhinoceros 3D.*
+
+![Renderizado del modelo 3D](Captura%20de%20pantalla%202026-10-28%20192742.png)
+*Figura 2: Vista isométrica del modelo 3D de la carcasa abierta y sus piezas listas para ensamblar.*
+
+### Fase 2: Prototipado Electrónico y Cableado
+Se realizaron las conexiones iniciales y pruebas de lectura en el protoboard / Arduino para asegurar el correcto funcionamiento del slider y el pulsador.
+
+![Prueba de cableado inicial](IMG_3637.jpg)
+*Figura 3: Conexión inicial de prueba entre los componentes y el Arduino Uno.*
+
+### Fase 3: Soldadura y Montaje en Placa Perforada
+Una vez validadas las señales, el circuito se trasladó a una placa perforada para compactar las conexiones y dotar al sistema de mayor robustez.
+
+![Placa perforada y conexiones](IMG_3638.jpg)
+*Figura 4: Distribución y soldadura definitiva sobre la placa perforada.*
+
+### Fase 4: Ensamblaje Final y Pruebas con el Juego Web (Próximamente)
+
+> **Nota:** Las fotografías reales del montaje definitivo con todos los elementos integrados dentro de la carcasa cortada/impresa se añadirán en cuanto finalice el ensamblaje físico final.
+> 
+> *[Insertar aquí la foto del controlador físico terminado y cerrado]*
 
 ---
 
-## 💻 4. Código y Comunicación Web
-El Arduino se comunica mediante puerto serial (Firmata o WebSerial API) para traducir los valores físicos del potenciómetro y el botón en acciones dentro del juego web.
-
-```cpp
-// Ejemplo base de lectura de entradas
-const int pinSlider = A0;
-const int pinButton = 2;
-
-void setup() {
-  Serial.begin(9600);
-  pinMode(pinButton, INPUT_PULLUP);
-}
-
-void loop() {
-  int sliderValue = analogRead(pinSlider);
-  int buttonState = digitalRead(pinButton);
-  
-  // Envío de datos al navegador
-  Serial.print(sliderValue);
-  Serial.print(",");
-  Serial.println(buttonState);
-  delay(50);
-}
+## 🚀 Próximos Pasos
+1. Corte y ensamblaje físico de la carcasa según los planos de Rhino.
+2. Integración final del circuito dentro de la caja.
+3. Conexión y mapeo de eventos con el juego web mediante comunicación serial / Web APIs.
